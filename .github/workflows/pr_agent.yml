@@ -1,0 +1,23 @@
+on:
+  pull_request:
+    types: [opened, ready_for_review, reopened]
+
+jobs:
+  pr_agent:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.sender.type != 'Bot' }}
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+    name: Run PR Agent on Every Pull Request
+
+    steps:
+      - name: PR Agent Action 
+        id: pr_agent
+        uses: qodo-ai/pr-agent@main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+
+      
