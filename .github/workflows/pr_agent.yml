@@ -29,6 +29,7 @@ jobs:
             -o /tmp/openai_resp.json || true
           echo "--- response headers ---"
           cat /tmp/openai_resp.json
+          
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           
