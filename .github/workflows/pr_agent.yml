@@ -19,5 +19,17 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      
 
+      - name: Test OpenAI key (echo response)
+        run: |
+          echo "Testing OpenAI key..."
+          curl -s -D - https://api.openai.com/v1/models \
+            -H "Authorization: Bearer $OPENAI_API_KEY" \
+            -o /tmp/openai_resp.json || true
+          echo "--- response headers ---"
+          cat /tmp/openai_resp.json
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_KEY }}
+          
       
